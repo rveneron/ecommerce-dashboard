@@ -1,17 +1,15 @@
 import { memo } from 'react';
-import Navbar from 'layouts/Navbar/Navbar';
-import { MainSidebar } from './Sidebar/MainSidebar';
-import DrawerHiddenButton from './Sidebar/MainSidebar/DrawerSidebar/DrawerHiddenButton';
-import { useMediaQueryMenu } from './Sidebar/MainSidebar/hooks/useRootMenu';
-import { RootAdminMain } from './Sidebar/MainSidebar/RootMenu/RootAdminMain';
-import { useMenuHome } from 'settings/main-menu/context/useMenuHome';
+import { ChildrenProps } from 'types/children-props';
+import { ClassnameProps } from 'types/classname-props';
+import Navbar from './Navbar/Navbar';
+import Box from '@mui/material/Box';
 
-const MainLayout = ({ children, className }: ChildrenProps & { className?: string }) => {
+type Props = ChildrenProps & ClassnameProps;
+
+const MainLayout = ({ children, className }: Props) => {
   return (
     <div className={className}>
-      <RootAdminMain pl={drawerWidth}>{children}</RootAdminMain>
-      {lgUp && !isHome && <DrawerHiddenButton left={drawerWidth} />}
-      <MainSidebar />
+      <Box>{children}</Box>
       <Navbar />
     </div>
   );

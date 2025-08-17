@@ -1,9 +1,8 @@
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import MainProvider from 'contexts/MainProvider';
+import MainProvider from 'context/MainProvider';
 import './index.css';
-import 'leaflet/dist/leaflet.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
