@@ -2,15 +2,12 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { ApiClientService, DefaultTokenService } from '@dfl/react-security';
-import Routes from 'routes';
-
-ApiClientService.setup({
-  TokenService: DefaultTokenService,
-});
+import { AppProvider } from './context/AppProvider';
 
 function App () {
-  return <Routes />;
+  return <AppProvider>
+    di
+  </AppProvider>;
 }
 
 export default App;

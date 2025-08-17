@@ -1,10 +1,9 @@
 import { Toaster } from 'react-hot-toast';
 import { CssBaseline, ThemeProvider } from '@mui/material';
-import { ChildrenProps, toasterOptions } from '@dfl/mui-react-common';
-import { useSettings } from 'contexts/SettingsProvider';
-import QueryProvider from 'contexts/QueryContext';
-import { AuthControl, SecurityProvider, useUser } from '@dfl/react-security';
-// import { TourProviderCustom as TourProvider } from './TourProvider';
+import QueryProvider from 'context/QueryContext';
+import { ChildrenProps } from '../types/children-props';
+import { toasterOptions } from 'constants/toasterOptions';
+import { theme } from 'constants/theme';
 
 type AppContentProps = {
   children: any;
@@ -13,9 +12,7 @@ type AppContentProps = {
 const AppContent = ({ children }: AppContentProps) => {
   return (
     <>
-      <AuthControl />
       {children}
-
       <CssBaseline />
       <Toaster toastOptions={toasterOptions} />
     </>
@@ -23,17 +20,10 @@ const AppContent = ({ children }: AppContentProps) => {
 };
 
 export const AppProvider = ({ children }: ChildrenProps) => {
-  const { theme } = useSettings(); // App theme
-  const { user } = useUser();
-
   return (
     <QueryProvider>
       <ThemeProvider theme={theme}>
-        {/*   <TourProvider> */}
-        <SecurityProvider useMe={user}>
-          <AppContent>{children}</AppContent>
-        </SecurityProvider>
-        {/* </TourProvider> */}
+        <AppContent>{children}</AppContent>
       </ThemeProvider>
     </QueryProvider>
   );
