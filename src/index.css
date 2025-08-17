@@ -1,0 +1,78 @@
+/*@tailwind base;*/
+@tailwind components;
+@tailwind utilities;
+
+
+/* disable tinymce warning */
+.tox-notifications-container {
+    display: none !important;
+}
+
+/* hide arrows for input with type === 'number' inside a parent with class === 'hide-arrows'  */
+.hide-arrows::-webkit-inner-spin-button input,
+.hide-arrows::-webkit-outer-spin-button input {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+}
+
+.hide-arrows input {
+    -moz-appearance: textfield !important;
+}
+
+.scrollbars::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbars {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.simplebar-wrapper .dfl-sidebar-menu .MuiList-root {
+    margin-top: 0;
+}
+
+.filterBack {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    backdrop-filter: blur(5px);
+    background-color: rgba(149, 172, 166, 0.125);
+    z-index: 2222;
+}
+
+.leaflet-marker-icon-hover {
+    animation: bounce 2s ease-in;
+}
+
+@keyframes bounce {
+    0% {
+        transform: translateX(0px);
+    }
+    25% {
+        transform: translateY(4px);
+    }
+    50% {
+        transform: translateY(7px);
+    }
+    75% {
+        transform: translateY(9px);
+    }
+    100% {
+        transform: translateY(10px);
+    }
+}
+
+
+/* .DFL-FormLabel{
+  text-transform: none;
+    white-space: normal;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2;
+    color: #2B3445;
+    opacity: 50%;
+
+} */
