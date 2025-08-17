@@ -1,46 +1,39 @@
-import { useCallback, useEffect, useState } from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { OPERATOR, OPERATOR_VALUES } from 'constants/operator.enum';
+import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { getDateFromString } from 'utils/date';
+import { DateRangePicker, DateRangePickerProps, Range, RangeKeyDict } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css';
+import { useDateSettings } from '../../context/DateSettingsContext';
+import { Locale } from 'date-fns'; // theme css file
 
 type Props = {
-  value: OPERATOR;
-  onChange: (operator: OPERATOR) => void;
+  value: [string, string];
+  onChange: (dateRange: [string, string]) => void;
 };
 
-export const OperatorSelect = ({ value = OPERATOR.AVG, onChange }: Props) => {
+export const DateRange = ({ value = ['2004-03-01T04:00:00.000Z', '2004-05-01T04:00:00.000Z'], onChange }: Props) => {
   const { t } = useTranslation('common');
 
+  const { locale } = useDateSettings();
+
   const handleChange = useCallback(
-    (event: SelectChangeEvent) => {
-      const value = event.target.value as OPERATOR;
-      onChange?.(value);
+    (rangesByKey: RangeKeyDict) => {
+      const val = rangesByKey?.selection;
+      onChange?.([val?.startDate?.toISOString() || '', val?.endDate?.toISOString() || '']);
     },
     [onChange],
   );
 
-  return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth size={'small'}>
-        <InputLabel id='operator-label'>{t('operator.title')}</InputLabel>
-        <Select
-          labelId='operator-label'
-          id='operator'
-          value={value}
-          label={t('operator.title')}
-          onChange={handleChange}
-        >
-          {OPERATOR_VALUES.map((op) => (
-            <MenuItem value={op} key={op}>
-              {t(`operator.${op}`)}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    </Box>
+  const range = useMemo(
+    () => ({
+      startDate: getDateFromString(value[0]?.substring(0, 10)),
+      endDate: getDateFromString(value[1]?.substring(0, 10)),
+      key: 'selection',
+    }),
+    [value],
   );
+
+  return null;
+  // return <DateRangePicker ranges={[range]} onChange={handleChange} locale={locale as unknown as Locale} />;
 };

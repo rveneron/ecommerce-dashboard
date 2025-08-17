@@ -1,0 +1,54 @@
+import { Paper, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { OperatorSelect } from 'components/OperatorSelector';
+import Box from '@mui/material/Box';
+import { OPERATOR } from 'constants/operator.enum';
+import { useData } from '../../context/DataContext';
+import { useCallback, useEffect } from 'react';
+import { DateRange } from 'components/DateRange';
+import { MetricSelector } from 'components/MetricSelector';
+
+const DashboardHeader = () => {
+  const { t } = useTranslation();
+
+  const { operator, setOperator, dateRange, setDateRange, metrics, setMetrics } = useData();
+
+  useEffect(() => {
+    console.log('metrics', ' =>', metrics);
+  }, [metrics]);
+
+  const handleOperatorChange = useCallback(
+    (operator: OPERATOR) => {
+      setOperator?.(operator);
+    },
+    [setOperator],
+  );
+
+  const handleDateRangeChange = useCallback(
+    (values: [string, string]) => {
+      setDateRange?.(values);
+    },
+    [setDateRange],
+  );
+
+  const handleMetricsChange = useCallback(
+    (metrics: string[]) => {
+      setMetrics?.(metrics);
+    },
+    [setMetrics],
+  );
+
+  return (
+    <Paper className={'p-4 flex flex-col items-start gap-4'}>
+      <Typography className={'text-3xl font-semibold'}>{t('dashboard')}</Typography>
+      <Box className={'flex flex-wrap items-center gap-4'}>
+        <Typography>{t('filterBy')}:</Typography>
+        <OperatorSelect value={operator || OPERATOR.AVG} onChange={handleOperatorChange} />
+        <DateRange value={dateRange as [string, string]} onChange={handleDateRangeChange} />
+        <MetricSelector value={metrics} onChange={handleMetricsChange} />
+      </Box>
+    </Paper>
+  );
+};
+
+export default DashboardHeader;

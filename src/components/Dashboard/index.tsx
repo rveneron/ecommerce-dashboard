@@ -1,14 +1,14 @@
-import { Paper, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import Box from '@mui/material/Box';
+import DashboardHeader from 'components/DashboardHeader';
 
-const DashboardHeader = () => {
-  
+const Dashboard = () => {
   const { t } = useTranslation();
   return (
-    <Paper className={'px-8 py-4 flex flex-col items-start justify-between'}>
-      <Typography></Typography>
-    </Paper>
+    <Box className={'px-4 flex flex-col gap-8'}>
+      <DashboardHeader />
+    </Box>
   );
-}
+};
 
-export default DashboardHeader;
+export default Dashboard;

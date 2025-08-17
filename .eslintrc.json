@@ -28,6 +28,7 @@
   ],
   "rules": {
     "semi": "off",
+    "no-debugger": "off",
     "@typescript-eslint/semi": "off",
     "react/react-in-jsx-scope": "off",
     "camelcase": "error",

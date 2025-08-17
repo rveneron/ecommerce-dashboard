@@ -1,5 +1,7 @@
-export enum OPERATOR {
-  'MIN' = 'min',
-  'MAX' = 'max',
-  'AVG' = 'avg',
+export enum INTERVALS {
+  'DAILY' = 'daily',
+  'MONTHLY' = 'monthly',
+  'YEARLY' = 'yearly',
 }
+
+export const INTERVALS_VALUES = Object.values(INTERVALS);

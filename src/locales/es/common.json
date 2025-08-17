@@ -1,3 +1,14 @@
 {
-
+  "appName": "Control de calidad del aire",
+  "profile": "Perfil de usuario",
+  "dashboard": "Dashboard",
+  "filterBy": "Filtrar por",
+  "showAndHide": "Mostrar / ocultar",
+  "metrics": "Métricas",
+  "operator": {
+    "title": "Operador",
+    "min": "Mínimo",
+    "max": "Máximo",
+    "avg": "Media"
+  }
 }

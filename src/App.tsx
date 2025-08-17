@@ -4,13 +4,16 @@ import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import { AppProvider } from './context/AppProvider';
 import { MainLayout } from './layout';
+import Dashboard from 'components/Dashboard';
 
-function App () {
+const App = () => {
   return (
     <AppProvider>
-      <MainLayout>Contenido</MainLayout>
+      <MainLayout>
+        <Dashboard />
+      </MainLayout>
     </AppProvider>
   );
-}
+};
 
 export default App;
