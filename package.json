@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
     "@dnd-kit/sortable": "^10.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -11,7 +12,6 @@
     "@mui/material": "^5.15.14 || ^6.0.0 || ^7.0.0",
     "@mui/x-date-pickers": "^8.10.0",
     "@tanstack/react-query": "^4.24.10",
-    "@types/react-date-range": "^1.4.10",
     "apexcharts": "^5.3.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
@@ -35,6 +35,7 @@
     "@types/jest": "^30.0.0",
     "@types/lodash": "^4.17.20",
     "@types/react": "^19.0.0",
+    "@types/react-date-range": "^1.4.10",
     "@types/react-dom": "^19.1.7",
     "@types/socket.io-client": "^3.0.0",
     "@typescript-eslint/eslint-plugin": "^5.0.0",

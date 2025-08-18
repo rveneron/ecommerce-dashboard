@@ -11,11 +11,14 @@ type ContextValue = {
   setOperator?: (_operator: OPERATOR) => void;
   setDateRange?: (_dateRange: [string, string]) => void;
   setMetrics?: (_metrics: string[]) => void;
+  data: Record<string, number> | null;
+  isConnected?: boolean;
 };
 // default value of the context
 export const defaultValue: ContextValue = {
   dateRange: ['2004-03-01T04:00:00.000Z', '2004-05-01T04:00:00.000Z'],
   operator: OPERATOR.AVG,
+  data: null
 };
 
 // create context
@@ -36,10 +39,8 @@ const DataProvider = ({ ...props }: ContextProps) => {
 
   const { data, isConnected } = useSocket();
 
-  console.log('Real time data', ' =>', data);
-
   return (
-    <Context.Provider value={{ operator, setOperator, dateRange, setDateRange, metrics, setMetrics }} {...props} />
+    <Context.Provider value={{ operator, setOperator, dateRange, setDateRange, metrics, setMetrics, data, isConnected }} {...props} />
   );
 };
 

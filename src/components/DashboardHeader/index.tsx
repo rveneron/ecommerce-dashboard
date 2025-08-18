@@ -4,7 +4,7 @@ import { OperatorSelect } from 'components/OperatorSelector';
 import Box from '@mui/material/Box';
 import { OPERATOR } from 'constants/operator.enum';
 import { useData } from '../../context/DataContext';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { DateRange } from 'components/DateRange';
 import { MetricSelector } from 'components/MetricSelector';
 
@@ -12,10 +12,6 @@ const DashboardHeader = () => {
   const { t } = useTranslation();
 
   const { operator, setOperator, dateRange, setDateRange, metrics, setMetrics } = useData();
-
-  useEffect(() => {
-    console.log('metrics', ' =>', metrics);
-  }, [metrics]);
 
   const handleOperatorChange = useCallback(
     (operator: OPERATOR) => {
@@ -39,13 +35,18 @@ const DashboardHeader = () => {
   );
 
   return (
-    <Paper className={'p-4 flex flex-col items-start gap-4'}>
-      <Typography className={'text-3xl font-semibold'}>{t('dashboard')}</Typography>
-      <Box className={'flex flex-wrap items-center gap-4'}>
+    <Paper className={'p-8 flex flex-col items-stretch lg:items-end justify-between lg:flex-row gap-4'}>
+      <Box className={'flex flex-col gap-1 flex-1 max-w-3xl'}>
+        <Typography className={'text-3xl font-semibold'}>{t('dashboard')}</Typography>
+        <Typography className={''}>{t('appDescription')}</Typography>
+      </Box>
+      <Box className={'flex flex-col gap-1'}>
         <Typography>{t('filterBy')}:</Typography>
-        <OperatorSelect value={operator || OPERATOR.AVG} onChange={handleOperatorChange} />
-        <DateRange value={dateRange as [string, string]} onChange={handleDateRangeChange} />
-        <MetricSelector value={metrics} onChange={handleMetricsChange} />
+        <Box className={'flex flex-row flex-wrap items-center gap-2'}>
+          <OperatorSelect value={operator || OPERATOR.AVG} onChange={handleOperatorChange} />
+          <DateRange value={dateRange as [string, string]} onChange={handleDateRangeChange} />
+          <MetricSelector value={metrics} onChange={handleMetricsChange} className={'flex-1'} />
+        </Box>
       </Box>
     </Paper>
   );

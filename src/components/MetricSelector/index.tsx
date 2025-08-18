@@ -9,12 +9,12 @@ import { VALUES_KEY_LABELS } from 'constants/values_key';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
+import { MetricType } from 'types/metric';
+import { ClassnameProps } from 'types/classname-props';
 
-export type MetricKey = keyof typeof VALUES_KEY_LABELS;
-
-type Props = {
-  value?: MetricKey[];
-  onChange: (value: MetricKey[]) => void;
+type Props = ClassnameProps & {
+  value?: MetricType[];
+  onChange: (value: MetricType[]) => void;
 };
 
 const MenuProps = {
@@ -27,7 +27,7 @@ const MenuProps = {
 
 const options = Object.keys(VALUES_KEY_LABELS);
 
-export const MetricSelector = ({ value = options, onChange }: Props) => {
+export const MetricSelector = ({ value = options, onChange, className }: Props) => {
   const { t } = useTranslation('common');
   const [metrics, setMetrics] = useState<string[]>(value);
 
@@ -48,7 +48,7 @@ export const MetricSelector = ({ value = options, onChange }: Props) => {
   const isChecked = useCallback((value: string) => metrics.includes(value), [metrics]);
 
   return (
-    <FormControl sx={{ m: 1, width: 300 }}>
+    <FormControl sx={{ m: 1, width: 300 }} className={className}>
       <InputLabel id='metrics-label'>{t('metrics')}</InputLabel>
       <Select
         size={'small'}
