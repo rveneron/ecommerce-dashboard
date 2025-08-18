@@ -1,6 +1,21 @@
 {
   "appName": "Control de calidad del aire",
   "appDescription": "Monitorea en tiempo real los niveles de contaminación ambiental con datos precisos y visualizaciones intuitivas. Este panel te permite conocer la concentración de partículas (PM2.5, PM10), gases como ozono (O₃), dióxido de nitrógeno (NO₂) y monóxido de carbono (CO), además del índice de calidad del aire (ICA) en tu zona.",
+  "coTimeline": {
+    "title": "Historial de emisión de monóxido de carbono (CO)"
+  },
+  "fields": {
+    "CO": "Emisión",
+    "count": "Cantidad"
+  },
+  "interval": {
+    "title": "Intervalos",
+    "daily": "Diario",
+    "monthly": "Mensual",
+    "yearly": "Anual",
+    "automatic": "Automático"
+  },
+  "noInfo": "Sin información",
   "profile": "Perfil de usuario",
   "dashboard": "Dashboard",
   "filterBy": "Filtrar por",

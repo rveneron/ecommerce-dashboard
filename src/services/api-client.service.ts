@@ -4,14 +4,15 @@ import { NETWORK_ERROR } from 'constants/errors';
 
 const TIMEOUT: number = Number(1000000);
 
+export const API_URL = process.env.REACT_APP_BACKEND_URL || 'https://api-challenge.dofleini.com';
+
 class ApiClientService {
   private readonly API_URL: string;
   private readonly defaultHeaders: Record<string, string> = {};
   private readonly service: AxiosInstance;
   private errorCallbacks: Array<(error: any) => void> = [];
 
-  constructor() {
-    const API_URL = process.env.REACT_APP_BACKEND_URL || 'https//challenge-api.dofleini.com';
+  constructor () {
     this.service = axios.create({
       baseURL: API_URL,
     });
@@ -22,7 +23,7 @@ class ApiClientService {
     this.post = this.service.post;
   }
 
-  onError(callback: (error: any) => void) {
+  onError (callback: (error: any) => void) {
     if (!this.errorCallbacks.some((func) => func === callback)) {
       this.errorCallbacks.push(callback);
     }
@@ -32,7 +33,7 @@ class ApiClientService {
     };
   }
 
-  private notifyError(error: any) {
+  private notifyError (error: any) {
     this.errorCallbacks.forEach((callback) => {
       callback?.(error);
     });
@@ -55,7 +56,7 @@ class ApiClientService {
     return customConfig;
   };
 
-  handleSuccess(response: AxiosResponse) {
+  handleSuccess (response: AxiosResponse) {
     return response;
   }
 
@@ -72,23 +73,23 @@ class ApiClientService {
     return await Promise.reject(dataError);
   };
 
-  get(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse> {
+  get (url: string, config?: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.service.get(url, config);
   }
 
-  delete(url: string, config?: AxiosRequestConfig): Promise<AxiosResponse> {
+  delete (url: string, config?: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.service.delete(url, config);
   }
 
-  post(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
+  post (url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.service.post(url, data, config);
   }
 
-  put(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
+  put (url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.service.put(url, data, config);
   }
 
-  patch(url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
+  patch (url: string, data: any, config?: AxiosRequestConfig): Promise<AxiosResponse> {
     return this.service.patch(url, data, config);
   }
 }

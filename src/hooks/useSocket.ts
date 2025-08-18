@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { io, type Socket } from 'socket.io-client';
+import { OPERATOR } from 'constants/operator.enum';
 
 interface SocketOptions {
   reconnection?: boolean;
@@ -12,17 +13,21 @@ export const AIR_QUALITY_UPDATE = 'AIR_QUALITY_UPDATE';
 
 const BASE_API_URL = 'wss://api-challenge.dofleini.com';
 
-export const useSocket = () => {
+const defaultQueries = {
+  operator: OPERATOR.AVG,
+};
+
+export const useSocket = (query: Record<string, any> = defaultQueries) => {
   const [isConnected, setIsConnected] = useState(false);
   const [data, setData] = useState<Record<string, number> | null>(null);
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const socketRef = useRef<Socket | null>(null);
   const lastUpdateRef = useRef<number>(0);
-  const interval = 60000;
+  const interval = 30000;
 
   const defaultOptions = useMemo<SocketOptions>(
     () => ({
-      transports: ['polling'],
+      transports: ['websocket', 'polling'],
       reconnectionAttempts: 3,
       upgrade: true,
       rememberUpgrade: true,
@@ -34,8 +39,14 @@ export const useSocket = () => {
     [],
   );
 
+  const buildUrlWithQuery = (baseUrl: string, params: Record<string, any>) => {
+    const queryString = new URLSearchParams(params).toString();
+    return `${baseUrl}?${queryString}`;
+  };
+
   const connect = useCallback(() => {
-    socketRef.current = io(BASE_API_URL, defaultOptions);
+    const urlWithParams = buildUrlWithQuery(BASE_API_URL, query);
+    socketRef.current = io(urlWithParams, defaultOptions);
 
     socketRef.current.on('connect', () => {
       setIsConnected(true);
@@ -70,7 +81,7 @@ export const useSocket = () => {
         return prev;
       });
     });
-  }, [defaultOptions]);
+  }, [defaultOptions, query]);
 
   const disconnect = useCallback(() => {
     if (socketRef.current) {
@@ -87,7 +98,7 @@ export const useSocket = () => {
     return () => {
       disconnect();
     };
-  }, [connect, disconnect]);
+  }, [connect, disconnect, query]);
 
   return {
     isConnected,
