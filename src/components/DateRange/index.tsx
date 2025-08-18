@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getDateFromString } from 'utils/date';
-import { DateRangePicker, DateRangePickerProps, Range, RangeKeyDict } from 'react-date-range';
+import { DateRangePicker, RangeKeyDict } from 'react-date-range';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css';
 import { useDateSettings } from '../../context/DateSettingsContext';
@@ -34,5 +34,15 @@ export const DateRange = ({ value = ['2004-03-01T04:00:00.000Z', '2004-05-01T04:
     [value],
   );
 
-  return <DateRangePicker ranges={[range]} onChange={handleChange} locale={locale as unknown as Locale} />;
+  return (
+    <DateRangePicker
+      ranges={[range]}
+      onChange={handleChange}
+      locale={locale as unknown as Locale}
+      showMonthAndYearPickers={false}
+      moveRangeOnFirstSelection={false}
+      direction='horizontal'
+      showDateDisplay={false}
+    />
+  );
 };
