@@ -70,6 +70,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "resolutions": {
+    "date-fns": "2.30.0"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
