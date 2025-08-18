@@ -34,7 +34,7 @@ const DashboardHeader = () => {
       <Box className={'flex flex-col gap-1'}>
         <Typography>{t('filterBy')}:</Typography>
         <Box className={'flex flex-row flex-wrap items-center gap-2'}>
-          <DateRange value={dateRange as [string, string]} onChange={handleDateRangeChange} />
+          {/* <DateRange value={dateRange as [string, string]} onChange={handleDateRangeChange} /> */}
           <MetricSelector value={metrics} onChange={handleMetricsChange} className={'flex-1'} />
         </Box>
       </Box>

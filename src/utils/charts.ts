@@ -102,7 +102,7 @@ export const groupData = (data: Array<{ x: string; y: number }>) => {
   const mapa = new Map<string, number>();
 
   data.forEach(({ x, y }) => {
-    mapa.set(x, (mapa.get(x) || 0) + y);
+    mapa.set(x, +((mapa.get(x) || 0) + y).toFixed(3));
   });
 
   return Array.from(mapa.entries()).map(([x, y]) => ({ x, y }));

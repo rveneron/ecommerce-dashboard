@@ -34,6 +34,5 @@ export const DateRange = ({ value = ['2004-03-01T04:00:00.000Z', '2004-05-01T04:
     [value],
   );
 
-  return null;
-  // return <DateRangePicker ranges={[range]} onChange={handleChange} locale={locale as unknown as Locale} />;
+  return <DateRangePicker ranges={[range]} onChange={handleChange} locale={locale as unknown as Locale} />;
 };

@@ -14,7 +14,7 @@ class AirQualityService extends EntityApiService<any> {
       }
       suffix += `to=${params.to as string}`;
     }
-    return this.handleResponse(ApiClientService.get(this.getPath(`/?${suffix}`), config));
+    return this.handleResponse(ApiClientService.get(this.getPath(`/range?${suffix}`), config));
   };
 
   getTimeline = (params: any, config?: AxiosRequestConfig): Promise<any> => {

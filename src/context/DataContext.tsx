@@ -4,6 +4,7 @@ import { OPERATOR } from 'constants/operator.enum';
 import { VALUES_KEY_LABELS } from 'constants/values_key';
 import { useCOTimeline } from 'hooks/useCOTimeline';
 import { INTERVALS } from 'constants/intervals.enum';
+import { useHistoricData } from 'hooks/useHistoricData';
 
 // Data value of the provider context
 type ContextValue = {
@@ -17,9 +18,12 @@ type ContextValue = {
   setMetrics?: (_metrics: string[]) => void;
   data: Record<string, number> | null;
   coData?: Array<Record<string, string | number>>;
+  historicData?: Array<Record<string, string | number>>;
   coError?: any;
+  historicError?: any;
   isConnected?: boolean;
   isLoadingCO?: boolean;
+  isLoadingHistoricData?: boolean;
 };
 // default value of the context
 export const defaultValue: ContextValue = {
@@ -59,6 +63,15 @@ const DataProvider = ({ ...props }: ContextProps) => {
     to: dateRange?.[1],
   });
 
+  const {
+    data: historicData,
+    error: historicError,
+    isLoading: isLoadingHistoricData,
+  } = useHistoricData({
+    from: dateRange?.[0],
+    to: dateRange?.[1],
+  });
+
   return (
     <Context.Provider
       value={{
@@ -75,6 +88,9 @@ const DataProvider = ({ ...props }: ContextProps) => {
         isLoadingCO,
         interval,
         setInterval,
+        historicData,
+        isLoadingHistoricData,
+        historicError,
       }}
       {...props}
     />

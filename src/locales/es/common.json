@@ -4,6 +4,8 @@
   "coTimeline": {
     "title": "Historial de emisión de monóxido de carbono (CO)"
   },
+  "date": "Fecha",
+  "historicData": "Datos históricos",
   "fields": {
     "CO": "Emisión",
     "count": "Cantidad"
