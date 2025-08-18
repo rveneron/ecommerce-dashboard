@@ -18,7 +18,7 @@ export const useSocket = () => {
   const [connectionError, setConnectionError] = useState<string | null>(null);
   const socketRef = useRef<Socket | null>(null);
   const lastUpdateRef = useRef<number>(0);
-  const interval = 5000;
+  const interval = 60000;
 
   const defaultOptions = useMemo<SocketOptions>(
     () => ({
