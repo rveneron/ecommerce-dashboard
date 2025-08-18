@@ -52,6 +52,9 @@ export const TableContainer = ({ className }: Props) => {
           '& .MuiDataGrid-columnHeader': {
             backgroundColor: '#000',
           },
+          '& .MuiButtonBase-root': {
+            color: 'white',
+          },
           '& .MuiDataGrid-columnHeaderTitleContainer': {
             backgroundColor: 'transparent',
             color: '#fff',
@@ -69,7 +72,7 @@ export const TableContainer = ({ className }: Props) => {
         }}
         checkboxSelection={false}
         rows={
-          historicData?.map((el, index) => ({ ...el, id: index, Date: getDateFromString(el.Date as string) })) || []
+          historicData?.map((el, index) => ({ ...el, id: index, Date: (el.Date as string).substring(0, 10) })) || []
         }
         // @ts-ignore
         columns={columns}
