@@ -109,10 +109,10 @@ export const groupData = (data: Array<{ x: string; y: number }>) => {
 };
 
 export const transformSeries = (series: Serie[]) => {
-  if (series[0].data.length) {
+  if (series?.[0]?.data?.length) {
     series[0].data = groupData(series[0].data);
   }
-  if (series[1].data.length) {
+  if (series?.[1]?.data?.length) {
     series[1].data = groupData(series[1].data);
   }
   return series;
